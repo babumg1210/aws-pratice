@@ -22,3 +22,20 @@ stages:
                   backendAWSBucketName: 'mytestapplication1234'
                   backendAWSKey: 'terraform.tfstate'
                   workingDirectory: '$(System.DefaultWorkingDirectory)/v1-vpc-module'
+              - task: TerraformTaskV4@4
+                inputs:
+                  provider: 'aws'
+                  backendServiceAWS: 'aws-sc'
+                  command: 'validate'
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/v1-vpc-module'
+              - task: TerraformTaskV4@4
+                inputs:
+                  provider: 'aws'
+                  command: 'plan'
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/v1-vpc-module'
+                  environmentServiceNameAWS: 'aws-sc'
+              - task: TerraformTaskV4@4
+                inputs:
+                  provider: 'aws'
+                  command: 'apply'
+                  environmentServiceNameAWS: 'aws-sc'
