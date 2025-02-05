@@ -39,3 +39,5 @@ stages:
                   provider: 'aws'
                   command: 'apply'
                   environmentServiceNameAWS: 'aws-sc'
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/v1-vpc-module'
+                  
