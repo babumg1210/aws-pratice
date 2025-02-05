@@ -21,3 +21,4 @@ stages:
                   backendServiceAWS: 'aws-sc'
                   backendAWSBucketName: 'mytestapplication1234'
                   backendAWSKey: 'terraform.tfstate'
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/v1-vpc-module'
