@@ -4,6 +4,7 @@ resource "aws_instance" "myec2vm" {
   instance_type = var.instance_type
   user_data = file("${path.module}/app1-install.sh")
   key_name      = "testkey" 
+  subnet_id     = aws_subnet.private_subnet_1.id   # Use the subnet in the correct VPC
   vpc_security_group_ids = [ aws_security_group.app_sg.id  ]
   # Create EC2 Instance in all Availabilty Zones of a VPC  
   #for_each = toset(data.aws_availability_zones.my_azones.names)
