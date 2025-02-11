@@ -8,7 +8,6 @@ resource "aws_vpc" "main" {
 resource "aws_subnet" "public_subnet" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "192.168.1.0/24"
-  map_public_ip_on_launch = true
 
   tags = {
     Name = "public-subnet"
@@ -60,7 +59,7 @@ resource "aws_eip" "example" {
 }
 resource "aws_nat_gateway" "my_nat" {
   allocation_id = aws_eip.example.id
-  subnet_id     = aws_subnet.private_subnet.id
+  subnet_id     = aws_subnet.private_subnet_1.id
 
   tags = {
     Name = "my-nat"
