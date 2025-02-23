@@ -12,32 +12,31 @@ pool:
 stages:
   - stage: 
     jobs:
-      -  job: init
-         steps:
-              - task: TerraformTaskV4@4
-                inputs:
-                  provider: 'aws'
-                  command: 'init'
-                  backendServiceAWS: 'aws-sc'
-                  backendAWSBucketName: 'mytestapplication1234'
-                  backendAWSKey: 'terraform.tfstate'
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/v1-vpc-module'
-              - task: TerraformTaskV4@4
-                inputs:
-                  provider: 'aws'
-                  backendServiceAWS: 'aws-sc'
-                  command: 'validate'
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/v1-vpc-module'
-              - task: TerraformTaskV4@4
-                inputs:
-                  provider: 'aws'
-                  command: 'plan'
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/v1-vpc-module'
-                  environmentServiceNameAWS: 'aws-sc'
-              - task: TerraformTaskV4@4
-                inputs:
-                  provider: 'aws'
-                  command: 'apply'
-                  environmentServiceNameAWS: 'aws-sc'
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/v1-vpc-module'
-                  
+      - job: init
+        steps:
+          - task: TerraformTaskV4@4
+            inputs:
+              provider: 'aws'
+              command: 'init'
+              backendServiceAWS: 'aws-sc'
+              backendAWSBucketName: 'mytestapplication1234'
+              backendAWSKey: 'terraform.tfstate'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/aws-practice/modules/vpc'
+          - task: TerraformTaskV4@4
+            inputs:
+              provider: 'aws'
+              backendServiceAWS: 'aws-sc'
+              command: 'validate'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/aws-practice/modules/vpc'
+          - task: TerraformTaskV4@4
+            inputs:
+              provider: 'aws'
+              command: 'plan'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/aws-practice/modules/vpc'
+              environmentServiceNameAWS: 'aws-sc'
+          - task: TerraformTaskV4@4
+            inputs:
+              provider: 'aws'
+              command: 'apply'
+              environmentServiceNameAWS: 'aws-sc'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/aws-practice/modules/vpc'
